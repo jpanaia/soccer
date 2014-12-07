@@ -12,7 +12,43 @@
 <% @issue.articles.each do |article| %>
 	<h3><%= article.title %></h3>
     <p><%= article.content.html_safe %></p>
+    <!--<h4><%#= article.quiz.question %></h4>-->
+	 
+
+	<!--<h3>Correct answer:</h3>
+	<p><%#= article.quiz.corret_answer %></p>
+
+	<h3>Your answer:</h3>
+	<p><%#= @user_answer %></p>-->
+
+
+  <% if "#{@user_answer}" != "#{article.quiz.corret_answer}" %>
+
+    <% if "#{@user_answer}" != '' %>
+      <h2> Sorry, try again.</h2>
+    <% end %>
+
+	<%= form_tag do %>
+	  <h2><%= article.quiz.question %></h2>
+
+	  <div class="field">
+	    <%= text_field_tag(:user_answer) %>
+	  </div>
+	  
+	  <div class="actions">
+	    <%= submit_tag("Submit") %>
+	  </div>
+	<% end %>
+
+	<% else %>
+	  <h2>Correct! <%= article.quiz.corret_answer %>. </h2>
+      <iframe width="560" height="315" src="//<%= article.quiz.video %>" frameborder="0" allowfullscreen></iframe>
+
+	<% end %>
+
+  <hr/>
 <% end %>
+
 
 <%= link_to 'Edit', edit_issue_path(@issue) %> |
 <%= link_to 'Back', issues_path %>

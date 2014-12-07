@@ -11,15 +11,18 @@ class IssuesController < ApplicationController
   # GET /issues/1
   # GET /issues/1.json
   def show
+     @user_answer = params[:user_answer]
   end
 
   # GET /issues/new
   def new
     @issue = Issue.new
+    @articles = Article.all
   end
 
   # GET /issues/1/edit
   def edit
+    @articles = Article.all
   end
 
   # POST /issues

@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
+  resources :scores
+
+  resources :quizzes
+
   root 'main#index'
 
   get 'main/about'
+
+  post 'quizzes/:id' => 'quizzes#show'
+  post 'issues/:id' => 'issues#show'
+
 
   devise_for :users
 
