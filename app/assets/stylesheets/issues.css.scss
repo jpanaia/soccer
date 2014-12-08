@@ -1,3 +1,30 @@
 // Place all the styles related to the Issues controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+/* PLAYER CARDS */
+
+#playercards { list-style:none; margin:100px 0; height:550px; }
+#playercards li { display:inline; float:left;
+  -webkit-perspective: 500; -webkit-transform-style: preserve-3d;
+  -webkit-transition-property: perspective; -webkit-transition-duration: 0.5s; }
+#playercards li:hover { -webkit-perspective: 5000; }
+  
+#playercards li img { border:10px solid #fcfafa; -webkit-transform: rotateY(30deg);
+  -moz-box-shadow:0 3px 10px  #000; -webkit-box-shadow:0 3px 10px  #000;
+  -webkit-transition-property: transform; -webkit-transition-duration: 0.5s; }
+#playercards li:hover img { -webkit-transform: rotateY(0deg); }
+
+.playerinfo { width:225px; /*height:180px;*/ background-color:rgba(255,255,255,0.9); margin:-95px 0 0 55px; position:absolute;
+  -moz-box-shadow:0 20px 40px #000; -webkit-box-shadow:0 20px 40px  #000; border: 10px solid #fff;
+  -webkit-transform: translateZ(30px) rotateY(30deg); 
+  -webkit-transition-property: transform, box-shadow, margin; -webkit-transition-duration: 0.5s; }
+  
+#playercards li:hover .playerinfo { -webkit-transform: rotateY(0deg); -webkit-box-shadow:0 5px 10px #000; margin:-75px 0 0 30px; }
+  
+.playerinfo h2 { font-family: 'Dosis', sans-serif; font-weight:700; text-align:center; padding-bottom:15px; }
+.playerinfo p { padding-bottom:15px; }
+.playerinfo a { padding:5px 10px; color:#125; text-decoration:none; display:block; /*width:80px;*/ text-align:center; margin:0 auto;
+  -moz-border-radius:5px; -webkit-border-radius:5px; font-weight:100 }
+.playerinfo a:hover, .playerinfo a:focus {  color:#3B6DD9; text-decoration:none }

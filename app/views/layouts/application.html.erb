@@ -2,13 +2,15 @@
 <html>
 <head>
   <title>SoccerYaya</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Dosis:400,700|Open+Sans:400,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
 	<nav class="navbar navbar-default" role="navigation">
@@ -27,8 +29,8 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="/articles">Articles</a></li>
         <li><a href="/issues">Issues</a></li>
+        <li><a href="/articles">Articles</a></li>
         <li><a href="/quizzes">Quizzes</a></li>
       </ul>
       <div class="navbar-right">

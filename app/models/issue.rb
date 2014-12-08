@@ -1,4 +1,7 @@
 class Issue < ActiveRecord::Base
+
+	validates :title, presence: true
+
 	has_many :articles
 	has_many :quizzes
 	has_many :scores 
