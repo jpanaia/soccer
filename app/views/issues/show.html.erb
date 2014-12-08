@@ -54,12 +54,13 @@
   <div class="col-md-8">
 	<h3><%= article.title %></h3>
     <p><%= article.content.html_safe %></p>
-    <p><%= link_to 'Edit', edit_article_path(article, :issue_id => @issue.id) %></p>
+    <p><%= link_to 'Edit', edit_article_path(article) %></p>
 
    </div>
-   <% if article.quiz != nil %>
 	   <div class="col-md-4">
-	   	<br/>
+	   	<% if article.quiz != nil %>
+
+		<br/>
 	    <div class="well">
 		  <h3>Q: <%= article.quiz.question %></h2>
 		  
@@ -68,8 +69,10 @@
 		  <% if article.quiz.video != '' %>
 	        <iframe width="300" height="215" src="//<%= article.quiz.video %>" frameborder="0" allowfullscreen></iframe>
 	      <% end %>
-	    </div>
-	<% end %>
+	       <p><%= link_to 'Edit', edit_quiz_path(article.quiz) %></p>
+
+	    <% end %>
+	   </div>
   </div>
     <br clear="all"/>
   <hr/>
