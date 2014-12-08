@@ -11,7 +11,11 @@ class IssuesController < ApplicationController
   # GET /issues/1
   # GET /issues/1.json
   def show
-     @user_answer = params[:user_answer]
+    if params[:quiz_id] != nil
+      @quiz = Quiz.find(params[:quiz_id])
+      @quiz.user_answer = params[:user_answer]
+      @quiz.save
+    end
   end
 
   # GET /issues/new

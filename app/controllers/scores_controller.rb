@@ -1,5 +1,6 @@
 class ScoresController < ApplicationController
   before_action :set_score, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :xml, :json
 
   def index
     @scores = Score.all

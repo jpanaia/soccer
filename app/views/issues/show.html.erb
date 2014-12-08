@@ -8,12 +8,63 @@
   <%= @issue.description %>
 </p>
 
+Total Articles: <%= @issue.articles.count %>
+<hr/>
+<!-- New code -->
 
+<%#= @issue.articles.first.title %>
+
+<% @issue.articles.each_with_index do |article, index| %>
+    <!-- only show first article -->
+    <% if index == 0 %>
+    	<h3><%= article.title %></h3>
+        <p><%= article.content.html_safe %></p>
+        <!-- first quiz -->
+        <%= form_tag do %>
+		  <h2><%= article.quiz.question %></h2>
+
+	      <%= hidden_field_tag :quiz_id, article.quiz.id %> 
+
+		  <div class="field">
+		    <%= text_field_tag(:user_answer) %>
+		  </div>
+		  
+		  <div class="actions">
+		    <%= submit_tag("Submit") %>
+		  </div>
+
+   			<% if article.quiz.user_answer == article.quiz.corret_answer %>
+   				<p>Hooray!</p>
+   				<% index += 1 %>
+   		    <% else %>
+   		       <p>Boo!</p>
+
+   			<% end %>
+	    <% end %>
+    <% else %>
+      <% if article.quiz.user_answer == article.quiz.corret_answer %>
+        <h3><%= article.title %></h3>
+        <p><%= article.content.html_safe %></p>
+        <% end %>
+  	<% end %>
+<% end %>
+
+
+
+
+
+<p>********************************************************</p>
+<p>********************************************************</p>
+<p>********************************************************</p>
+<p>********************************************************</p>
+
+<!-- Old code -->
 <% @issue.articles.each do |article| %>
+   Article #<%= article.id %>
+  <!-- first time show content, then only show if prev quiz is correct -->
 	<h3><%= article.title %></h3>
     <p><%= article.content.html_safe %></p>
     <!--<h4><%#= article.quiz.question %></h4>-->
-	 
 
 	<!--<h3>Correct answer:</h3>
 	<p><%#= article.quiz.corret_answer %></p>
@@ -22,14 +73,21 @@
 	<p><%#= @user_answer %></p>-->
 
 
-  <% if "#{@user_answer}" != "#{article.quiz.corret_answer}" %>
+  <%# if "#{@user_answer}" != "#{article.quiz.corret_answer}" %>
+   <% if "#{article.quiz.user_answer}" != "#{article.quiz.corret_answer}" %>
 
-    <% if "#{@user_answer}" != '' %>
-      <h2> Sorry, try again.</h2>
-    <% end %>
+    <%# if "#{@user_answer}" != '' %>
+      <!--<script>
+      // 	$(document).ready(function (){
+      // 		alert('Sorry, try again.')
+      // 	});
+      </script>-->
+    <%# end %>
 
 	<%= form_tag do %>
 	  <h2><%= article.quiz.question %></h2>
+
+      <%= hidden_field_tag :quiz_id, article.quiz.id %> 
 
 	  <div class="field">
 	    <%= text_field_tag(:user_answer) %>
@@ -42,12 +100,14 @@
 
 	<% else %>
 	  <h2>Correct! <%= article.quiz.corret_answer %>. </h2>
+	  <% @correct_answer = true %>
       <iframe width="560" height="315" src="//<%= article.quiz.video %>" frameborder="0" allowfullscreen></iframe>
-
 	<% end %>
 
   <hr/>
 <% end %>
+
+
 
 
 <%= link_to 'Edit', edit_issue_path(@issue) %> |

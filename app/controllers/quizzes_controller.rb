@@ -8,7 +8,8 @@ class QuizzesController < ApplicationController
   end
 
   def show
-    @user_answer = params[:user_answer]
+    @quiz.user_answer = params[:user_answer]
+    @quiz.save
     respond_with(@quiz)
   end
 
@@ -44,6 +45,6 @@ class QuizzesController < ApplicationController
     end
 
     def quiz_params
-      params.require(:quiz).permit(:question, :corret_answer, :video, :article_id)
+      params.require(:quiz).permit(:question, :corret_answer, :video, :user_answer, :article_id)
     end
 end
