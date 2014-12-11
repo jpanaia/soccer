@@ -1,20 +1,55 @@
-<div class="row">
+<!--<div class="row">
   <ul id="playercards">
-    <% @issues.each do |issue| %>
+    <%# @issues.each do |issue| %>
       <li class="col-md-4">
-        <%= image_tag issue.avatar.url(:medium) %>
+        <%#= image_tag issue.avatar.url(:medium) %>
 
         <div class="playerinfo">
-           <h2><%= link_to issue.title, issue %></h2>
-           <!--<h5><%#= time_ago_in_words(issue.created_at) %> ago</h5>-->
+           <h2><%#= link_to issue.title, issue %></h2>
+           <h5><%#= time_ago_in_words(issue.created_at) %> ago</h5>
         </div>
       </li> 
-    <% end %>
+    <%# end %>
   </ul>
-</div>
+</div>-->
 
 
-<p><%= link_to 'New Issue', new_issue_path, class: 'btn btn-primary' %></p>
+<!-- <p><%#= link_to 'New Issue', new_issue_path, class: 'btn btn-primary' %></p> -->
 <!-- <h5><%#= time_ago_in_words(issue.created_at) %> ago</h5>
 <p><%#= link_to 'Edit', edit_issue_path(issue) %>
         <%#= link_to 'Destroy', issue, method: :delete, data: { confirm: 'Are you sure?' } %></p> -->
+
+<style>
+  <% @issues.each_with_index do |issue, index| %>
+    .ch-img-<%= index %> { 
+        background: url(<%= asset_path issue.avatar.url(:medium) %>);
+        background-size: cover;
+    }
+  <% end %>
+</style>
+
+<p><%= link_to 'New Issue', new_issue_path, class: 'btn btn-info' %></p>
+
+<ul class="row ch-grid" style="background-color:transparent">
+    <% @issues.each_with_index do |issue, index| %>
+      <div class="col-md-4">
+        <li>
+          <div class="ch-item ch-img-<%=index%>">
+            <div class="ch-info-wrap">
+              <div class="ch-info">
+                <div class="ch-info-front ch-img-<%=index%>">
+                </div>
+                <div class="ch-info-back">
+                  <h3><%= issue.description %></h3>
+                  <p><%= link_to 'Read article...', issue %></p>
+                </div>  
+              </div>
+            </div>
+          </div>
+        </li>
+        <p align="center"><%= link_to 'Edit', edit_issue_path(issue) %> |
+       <%= link_to 'Destroy', issue, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+      </div>
+   <% end %>
+</ul>
+
