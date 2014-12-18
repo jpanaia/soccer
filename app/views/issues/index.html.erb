@@ -28,7 +28,9 @@
   <% end %>
 </style>
 
+
 <p><%= link_to 'New Issue', new_issue_path, class: 'btn btn-info' %></p>
+
 
 <ul class="row ch-grid" style="background-color:transparent">
     <% @issues.each_with_index do |issue, index| %>
@@ -40,7 +42,7 @@
                 <div class="ch-info-front ch-img-<%=index%>">
                 </div>
                 <div class="ch-info-back">
-                  <h3><%= issue.description %></h3>
+                  <h3><%= issue.title %></h3>
                   <p><%= link_to 'Read article...', issue %></p>
                 </div>  
               </div>

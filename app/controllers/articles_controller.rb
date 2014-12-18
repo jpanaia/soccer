@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 
   # GET /articles
   # GET /articles.json
@@ -16,13 +16,13 @@ class ArticlesController < ApplicationController
   # GET /articles/new
   def new
     @article = Article.new
-    @quiz = Quiz.all
+    @quizzes = Quiz.all
     @issues = Issue.all
   end
 
   # GET /articles/1/edit
   def edit
-     @quiz = Quiz.all
+     @quizzes = Quiz.all
      @issues = Issue.all
   end
 

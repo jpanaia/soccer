@@ -10,11 +10,11 @@
 
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-<link href='http://fonts.googleapis.com/css?family=Dosis:400,700|Open+Sans:400,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Dosis:400,700|Open+Sans:400,700|Slabo+27px' rel='stylesheet' type='text/css'>
 </head>
 <body>
   <div id="wrapper">
-	<nav class="navbar navbar-default" role="navigation">
+	<nav class="navbar" role="navigation">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -24,7 +24,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/"><%= image_tag 'soccer_ball.png', width: '60%', style: 'margin-top:-8px;' %></a>
+      <a class="navbar-brand" href="/"><%= image_tag 'kick-logo.png', style: 'margin-top:-8px;width:75px' %></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -35,7 +35,8 @@
         <li><a href="/quizzes">Quizzes</a></li>
       </ul>
       <div class="navbar-right">
-	    <% if user_signed_in? %>
+	    <%= image_tag 'soccer_ball.png', width: '30px' %>
+      <% if user_signed_in? %>
 	      You are logged in as 
 		  <%= link_to "#{current_user.email}", edit_user_registration_path %> | 
 	      <%= link_to "Log out", destroy_user_session_path, method: :delete %>

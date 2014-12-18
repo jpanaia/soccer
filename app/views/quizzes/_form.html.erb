@@ -11,27 +11,27 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :question %><br>
-    <%= f.text_field :question %>
+    <%= f.text_field :question, class: 'form-control'  %>
   </div>
-  <div class="field">
-    <%= f.label :corret_answer %><br>
-    <%= f.text_field :corret_answer %>
+  <div class="field form-group">
+    <%= f.label "Correct Answer" %><br>
+    <%= f.text_field :corret_answer, class: 'form-control'  %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :video %><br>
-    <%= f.text_field :video %>
+    <%= f.text_field :video, class: 'form-control'  %>
   </div>
  <!--  <div class="field">
     <%#= f.label :article_id %><br>
     <%#= f.number_field :article_id %>
   </div> -->
-   <div class="field">
-    <%= f.select(:article_id, @articles.collect {|a| [ a.title, a.id ] }, {:include_blank => 'Please select an article'}) %>
+   <div class="field form-group">
+    <%= f.select(:article_id, @articles.collect {|a| [ a.title, a.id ] }, {:include_blank => 'Please select an article'}, class: 'form-control')  %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-info'%>
   </div>
 <% end %>
