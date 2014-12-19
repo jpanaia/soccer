@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   post 'quizzes/:id' => 'quizzes#show'
   post 'issues/:id' => 'issues#show'
 
+  post 'issues/:id/clearQuiz' => 'issues#clearQuiz'
+ 
+
+  # get 'issues/:id' => 'issues#clearQuiz'
 
   devise_for :users
 

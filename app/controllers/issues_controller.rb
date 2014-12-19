@@ -18,6 +18,17 @@ class IssuesController < ApplicationController
     end
   end
 
+  def clearQuiz
+    @quizzes = Quiz.all
+    @quizzes.each do |quiz|
+      quiz.user_answer = ''
+      quiz.save
+    end
+
+    @issue = Issue.find(params[:id])
+    redirect_to @issue
+  end
+
   # GET /issues/new
   def new
     @issue = Issue.new

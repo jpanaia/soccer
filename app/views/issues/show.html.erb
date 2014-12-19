@@ -5,45 +5,116 @@
       <em style="margin-left:20px;color:#fff"><small>Published: <%= time_ago_in_words(@issue.updated_at) %> ago</small></em>
 </div>
 
-
-<div class="row" id="article">
-<% @issue.articles.each do |article| %>
+<!-- <div class="row" id="article">
+<%# @issue.articles.each do |article| %>
   <div class="col-md-8">
     <div class="panel">
-      <h3><%= article.title %></h3>
+      <h3><%#= article.title %></h3>
 
-        <p><%= article.content.html_safe %></p>
-        <p><%= link_to 'Edit', edit_article_path(article) %></p>
+        <p><%#= article.content.html_safe %></p>
+        <p><%#= link_to 'Edit', edit_article_path(article) %></p>
      </div>
    </div>
      <div class="col-md-4">
-      <% if article.quiz != nil %>
+      <%# if article.quiz != nil %>
 
     <br/>
       <div class="well">
-      <h3>Q: <%= article.quiz.question %></h2>
+      <h3>Q: <%#= article.quiz.question %></h2>
       
-      <h3>A: <%= article.quiz.corret_answer %>.</h2>
+      <h3>A: <%#= article.quiz.corret_answer %>.</h2>
     
-      <% if article.quiz.video != '' %>
-          <iframe width="300" height="215" src="//<%= article.quiz.video %>" frameborder="0" allowfullscreen></iframe>
-        <% end %>
-         <p><%= link_to 'Edit', edit_quiz_path(article.quiz) %></p>
+      <%# if article.quiz.video != '' %>
+          <iframe width="300" height="215" src="//<%#= article.quiz.video %>" frameborder="0" allowfullscreen></iframe>
+        <%# end %>
+         <p><%#= link_to 'Edit', edit_quiz_path(article.quiz) %></p>
 
-      <% end %>
+      <%# end %>
      </div>
   </div>
     <br clear="all"/>
   <hr/>
-<% end %>
-</div>
+<%# end %> -->
+
+<div class="row" id="article">
+  <% @issue.articles.find_each.with_index do |article, index| %>
+    <!-- Show first quiz -->
+    <% if index == 0 %>  
+      <div class="col-md-8">
+        <div class="panel"> 
+          <h3><%= article.title %></h3>
+            <p><%= article.content.html_safe %></p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="well">
+            <%= form_tag do %>
+              <h2>Q: <%= article.quiz.question %></h2>
+              <h3>A: <%=article.quiz.corret_answer%> </h3>
+
+              <%= hidden_field_tag :quiz_id, article.quiz.id %> 
+              <div class="field">
+                <%= text_field_tag(:user_answer) %>
+              </div>      
+              <div class="actions">
+                <%= submit_tag("Submit") %>
+              </div>
+           <% end %>
+          </div>
+        </div>
+
+        <% if article.quiz.user_answer == article.quiz.corret_answer %>
+<!--           <h3>Good Job! Onto the next article!</h3>
+ -->          <% next %>              
+        <% else %>
+          <% break %>
+       <% end %>   
+    <!-- Show additional quizzes -->    
+    <% else %>
+      <div class="col-md-8">
+        <div class="panel">
+          <h3><%= article.title %></h3>
+          <p><%= article.content.html_safe %></p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="well">
+          <%= form_tag do %>
+            <h2>Q:<%= article.quiz.question %></h2>
+            <h3>A: <%=article.quiz.corret_answer%> </h3>
+            <%= hidden_field_tag :quiz_id, article.quiz.id %> 
+            <div class="field">
+              <%= text_field_tag(:user_answer) %>
+            </div>
+            <div class="actions">
+              <%= submit_tag("Submit") %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <% if article.quiz.user_answer == article.quiz.corret_answer %>
+         <% if article.quiz.video != '' %>
+            <hr/>
+            <br clear="all"/>
+            <iframe width="300" height="215" src="//<%= article.quiz.video %>" frameborder="0" allowfullscreen></iframe>
+            <%= button_to "Clear Quiz", :action => "clearQuiz" %>
+
+          <% end %>
+          <!-- <h3>Good Job! Onto the next article!</h3>-->        
+        <% next %>               
+      <% else %>
+        <% break %>
+      <% end %>  
+    <% end %> 
+  <% end %> <!-- end  each loop -->
 
 
-
+</div> <!-- end row -->
 
 
 
 <%= link_to 'Edit', edit_issue_path(@issue) %> |
 <%= link_to 'Back', issues_path %>
 
-</div>
+</div> <!-- end container-bg -->
