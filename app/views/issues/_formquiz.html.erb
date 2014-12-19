@@ -1,0 +1,22 @@
+ <%= form_tag do %>
+    <h2>Q: <%= article.quiz.question %></h2>
+    <h3>A: <%=article.quiz.corret_answer%> </h3>
+
+    <%= hidden_field_tag :quiz_id, article.quiz.id %> 
+
+    <div class="field">
+      <%= radio_button_tag(:user_answer, "#{article.quiz.wrong_answer1}") %>
+      <%= label_tag(article.quiz.wrong_answer1) %><br/>
+
+      <%= radio_button_tag(:user_answer, "#{article.quiz.wrong_answer2}") %>
+      <%= label_tag(article.quiz.wrong_answer2) %><br/>
+
+      <%= radio_button_tag(:user_answer, "#{article.quiz.corret_answer}") %>
+      <%= label_tag(article.quiz.corret_answer) %>
+    </div>      
+
+    <div class="actions">
+      <%= submit_tag("Submit") %>
+    </div>
+    
+ <% end %>

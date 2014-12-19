@@ -1,0 +1,54 @@
+.container-bg
+  .row{:style => "height:200px;overflow:hidden;background:url(#{asset_path @issue.avatar.url});width:103%;"}
+    %h1{:style => "margin:90px 0 0 20px;color:#fff"}= @issue.title
+    %em{:style => "margin-left:20px;color:#fff"}
+      %small
+        Published: #{time_ago_in_words(@issue.updated_at)} ago
+  #article.row
+    = button_to "Clear Quiz", :action => "clearQuiz"
+
+    - @issue.articles.find_each.with_index do |article, index|
+      .col-md-8
+        .panel
+          %h3= article.title 
+          = link_to 'Edit', edit_article_path(article)
+          %p= article.content.html_safe
+      .col-md-4
+        .well
+          - if article.quiz.user_answer != article.quiz.corret_answer
+            = form_tag do
+              %h2
+                Q: #{article.quiz.question}
+              %h3
+                A: #{article.quiz.corret_answer}
+              = hidden_field_tag :quiz_id, article.quiz.id
+              .field
+                = radio_button_tag(:user_answer, "#{article.quiz.wrong_answer1}")
+                = label_tag(article.quiz.wrong_answer1)
+                %br/
+                = radio_button_tag(:user_answer, "#{article.quiz.wrong_answer2}")
+                = label_tag(article.quiz.wrong_answer2)
+                %br/
+                = radio_button_tag(:user_answer, "#{article.quiz.corret_answer}")
+                = label_tag(article.quiz.corret_answer)
+              .actions
+                = submit_tag("Submit")
+            - break
+          - else
+            %h2
+              Q: #{article.quiz.question}
+            %h3
+              A: #{article.quiz.corret_answer}
+            .alert.alert-success.alert-dismissible{:role => "alert"}
+              %button.close{"data-dismiss" => "alert", :type => "button"}
+                %span{"aria-hidden" => "true"} ×
+                %span.sr-only Close
+              %strong Good Job!
+
+            - if article.quiz.user_answer == article.quiz.corret_answer
+              - if article.quiz.video != ''
+                %hr/
+                %br{:clear => "all"}/
+                %iframe{:allowfullscreen => "", :frameborder => "0", :height => "215", :src => "//#{article.quiz.video}", :width => "300"}
+
+        
