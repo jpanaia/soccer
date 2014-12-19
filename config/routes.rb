@@ -12,9 +12,6 @@ Rails.application.routes.draw do
 
   post 'issues/:id/clearQuiz' => 'issues#clearQuiz'
  
-
-  # get 'issues/:id' => 'issues#clearQuiz'
-
   devise_for :users
 
   resources :issues

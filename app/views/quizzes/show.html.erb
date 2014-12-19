@@ -3,18 +3,24 @@
 <%= form_tag do %>
 
   <h2><%= @quiz.question %></h2>
-
+<!-- 
   <div class="field">
-    <%= text_field_tag(:user_answer) %>
+    <%#= text_field_tag(:user_answer) %>
   </div>
   
   <div class="actions">
-    <%= submit_tag("Submit") %>
+    <%#= submit_tag("Submit") %>
   </div>
-<% end %>
+<% end %> -->
 
 <h3>Correct answer:</h3>
 <p><%= @quiz.corret_answer %></p>
+
+<h3>Wrong answer 1:</h3>
+<p><%= @quiz.wrong_answer1 %></p>
+
+<h3>Wrong answer 2:</h3>
+<p><%= @quiz.wrong_answer2 %></p>
 
 <h3>Your answer:</h3>
 <p><%= @user_answer %></p>
